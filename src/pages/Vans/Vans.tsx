@@ -62,7 +62,7 @@ const Vans = () => {
           </button>
           <button
             onClick={() => handleFilterChange("type", null)}
-            className={clsx("ml-auto underline", !typeFilter && "hidden")}
+            className={clsx("underline", !typeFilter && "hidden")}
           >
             Clear filters
           </button>

@@ -2,7 +2,6 @@ const VansSkeleton = () => {
   const count = Array.from<number>({ length: 4 });
   return (
     <div className="w-full my-4 animate-pulse">
-      <h1 className="text-4xl font-bold">Explore our van options</h1>
       <div className="flex flex-wrap gap-4 items-center my-6 text-textGray">
         <button className="bg-skeletonBg px-4 py-1 rounded-md flex-1 max-w-16">
           &nbsp;
