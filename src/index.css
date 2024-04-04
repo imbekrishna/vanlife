@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.link-button {
+  @apply inline-block text-center border-0 py-3 px-5 font-bold rounded-md cursor-pointer transform ease-in-out hover:translate-x-1 hover:translate-y-1;
+}
+
+.van-type {
+  @apply py-1.5 px-6 font-medium border-none rounded-md bg-btnPrimary text-white not-italic max-w-min capitalize hover:text-[#ffead0] focus:outline-none;
+}
+
+.van-type.selected {
+  @apply text-[#ffead0];
+}
+
+.van-type.simple:hover,
+.van-type.simple.selected {
+  background-color: #e17654;
+}
+
+.van-type.rugged:hover,
+.van-type.rugged.selected {
+  background-color: #115e59;
+}
+
+.van-type.luxury:hover,
+.van-type.luxury.selected {
+  background-color: #161616;
+}
