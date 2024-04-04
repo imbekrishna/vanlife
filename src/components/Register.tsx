@@ -33,18 +33,37 @@ const Register = () => {
           type="text"
           name="name"
           placeholder="Full Name"
+          required
+        />
+        <input
+          className="py-2 px-4 border-t-2 border-x-2 text-textGray placeholder:text-textGray"
+          type="date"
+          name="dateofbirth"
+          title="Your date of birth."
+          required
         />
         <input
           className="py-2 px-4 border-t-2 border-x-2 placeholder:text-textGray"
           type="email"
           name="email"
           placeholder="Email address"
+          required
+        />
+        <input
+          className="py-2 px-4 border-t-2 border-x-2 placeholder:text-textGray"
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+          title="Must contain at least one  number and one uppercase and lowercase letter, and at least 6 or more characters"
         />
         <input
           className="py-2 px-4 rounded-b-md border-2 placeholder:text-textGray"
           type="password"
-          name="password"
-          placeholder="Password"
+          name="confirm_password"
+          placeholder="Confirm Password"
+          required
         />
         <button
           className="bg-btnPrimary rounded-md py-3 font-semibold mt-4 text-white disabled:bg-textGray"

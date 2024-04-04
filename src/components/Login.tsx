@@ -31,12 +31,14 @@ const Login = () => {
           type="email"
           name="email"
           placeholder="Email address"
+          required
         />
         <input
           className="py-2 px-4 rounded-b-md border-2 placeholder:text-textGray"
           type="password"
           name="password"
           placeholder="Password"
+          required
         />
         <button
           className="bg-btnPrimary rounded-md py-3 font-semibold mt-4 text-white disabled:bg-textGray"
