@@ -7,6 +7,7 @@ import {
   getDoc,
   where,
   query,
+  setDoc,
 } from "firebase/firestore/lite";
 
 import {
@@ -34,6 +35,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const vansCollectionRef = collection(db, "vans");
+const userCollectionRef = collection(db, "users");
 
 export async function getVans() {
   try {
@@ -101,6 +103,7 @@ export async function loginUser(creds: {
 
 export async function registerUser(creds: {
   name: string;
+  dateOfBirth: Date;
   email: string;
   password: string;
 }) {
@@ -111,6 +114,15 @@ export async function registerUser(creds: {
       creds.password
     );
     await updateProfile(userCreds.user, { displayName: creds.name });
+
+    const userDoc = doc(userCollectionRef, userCreds.user.uid);
+
+    await setDoc(userDoc, {
+      name: creds.name,
+      email: creds.email,
+      dateOfBirth: creds.dateOfBirth,
+    });
+
     return userCreds.user;
   } catch (error) {
     if (error instanceof FirebaseError) {

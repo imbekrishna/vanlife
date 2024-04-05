@@ -59,6 +59,5 @@ export async function hostVansDetailLoader({
 export function loginLoader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const message = url.searchParams.get("message");
-  console.log(message);
   return message;
 }

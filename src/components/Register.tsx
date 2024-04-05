@@ -5,52 +5,56 @@ import {
   useLoaderData,
   useNavigation,
 } from "react-router-dom";
-import { APIError } from "../utils/types";
+import FormInput from "./FormInput";
 
 const Register = () => {
   // TODO: add message and redirect for login as well
 
   const message = useLoaderData() as string | null;
-  const error = useActionData() as APIError | undefined;
+  const error = useActionData() as string[] | undefined;
   const navigation = useNavigation();
-
   return (
-    <div className="flex flex-col items-center justify-center w-full md:w-3/4 lg:w-1/2">
+    <div className="flex flex-col items-center justify-center w-full my-8 md:w-3/4 lg:w-1/2">
       {message && (
         <p className="p-2 bg-rose-100 w-full text-center rounded-md border-2 border-rose-600 text-rose-600 mb-4">
           {message}
         </p>
       )}
-      {error && (
-        <p className="p-2 bg-rose-100 w-full text-center rounded-md border-2 border-rose-600 text-rose-600 mb-4">
-          {error.message}
-        </p>
-      )}
       <h1 className="text-3xl font-bold">Create your account</h1>
-      <Form replace={true} className="flex flex-col w-full my-8" method="post">
-        <input
-          className="py-2 px-4 rounded-t-md border-t-2 border-x-2 placeholder:text-textGray"
-          type="text"
+      {error && (
+        <ul className="p-2 bg-rose-100 w-full rounded-md border-2 border-rose-600 text-rose-600 my-4">
+          {error.map((m) => (
+            <li>{m}</li>
+          ))}
+        </ul>
+      )}
+      <Form replace={true} className="flex flex-col w-full gap-2" method="post">
+        <FormInput
+          id="name"
+          label="Full Name"
           name="name"
-          placeholder="Full Name"
+          placeholder="John Doe"
           required
         />
-        <input
-          className="py-2 px-4 border-t-2 border-x-2 text-textGray placeholder:text-textGray"
+        <FormInput
+          id="date"
           type="date"
-          name="dateofbirth"
+          label="Date of Birth"
+          name="dateOfBirth"
           title="Your date of birth."
           required
         />
-        <input
-          className="py-2 px-4 border-t-2 border-x-2 placeholder:text-textGray"
+        <FormInput
+          id="email"
+          label="Email address"
           type="email"
           name="email"
           placeholder="Email address"
           required
         />
-        <input
-          className="py-2 px-4 border-t-2 border-x-2 placeholder:text-textGray"
+        <FormInput
+          id="password"
+          label="Password"
           type="password"
           name="password"
           placeholder="Password"
@@ -58,10 +62,11 @@ const Register = () => {
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
           title="Must contain at least one  number and one uppercase and lowercase letter, and at least 6 or more characters"
         />
-        <input
-          className="py-2 px-4 rounded-b-md border-2 placeholder:text-textGray"
+        <FormInput
+          id="confirmPassword"
+          label="Confirm Password"
           type="password"
-          name="confirm_password"
+          name="confirmPassword"
           placeholder="Confirm Password"
           required
         />
@@ -73,7 +78,7 @@ const Register = () => {
           {navigation.state === "submitting" ? "Creating..." : "Create account"}
         </button>
       </Form>
-      <p className="font-semibold">
+      <p className="font-semibold  mt-8">
         Already have an account?{" "}
         <Link to="/login" className="text-btnPrimary">
           Login now
