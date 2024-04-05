@@ -4,8 +4,8 @@ import logoutIcon from "../assets/logout_icon.svg";
 import menuIcon from "../assets/menu_icon.svg";
 import clsx from "clsx";
 import { signOutuser } from "../api";
-import { UserContext } from "../context/UserContext";
 import { useContext, useState } from "react";
+import UserContext from "../context/UserContext";
 
 const Header = () => {
   const contextData = useContext(UserContext);

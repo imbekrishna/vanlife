@@ -8,8 +8,6 @@ import {
 import FormInput from "./FormInput";
 
 const Register = () => {
-  // TODO: add message and redirect for login as well
-
   const message = useLoaderData() as string | null;
   const error = useActionData() as string[] | undefined;
   const navigation = useNavigation();

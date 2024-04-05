@@ -1,17 +1,5 @@
-import { ReactNode, createContext, useState } from "react";
-
-export interface IUser {
-  uid: string;
-  email: string | null;
-}
-
-export type UserContextType = {
-  user: IUser | null;
-  removeUser: () => void;
-  setUser: (user: IUser) => void;
-};
-
-export const UserContext = createContext<UserContextType | null>(null);
+import { ReactNode, useState } from "react";
+import UserContext, { IUser } from "./UserContext";
 
 export default function UserContextProvider({
   children,

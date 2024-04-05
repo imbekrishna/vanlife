@@ -16,7 +16,6 @@ import {
   signInWithEmailAndPassword,
   signOut,
   UserCredential,
-  updateProfile,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -89,7 +88,11 @@ export async function loginUser(creds: {
       creds.email,
       creds.password
     );
-    return userCreds.user;
+
+    const docRef = doc(userCollectionRef, userCreds.user.uid);
+    const userSnapshot = await getDoc(docRef);
+
+    return { ...userCreds.user, ...userSnapshot.data() };
   } catch (error) {
     if (error instanceof FirebaseError) {
       throw {
@@ -103,7 +106,7 @@ export async function loginUser(creds: {
 
 export async function registerUser(creds: {
   name: string;
-  dateOfBirth: Date;
+  dateOfBirth: number;
   email: string;
   password: string;
 }) {
@@ -113,7 +116,6 @@ export async function registerUser(creds: {
       creds.email,
       creds.password
     );
-    await updateProfile(userCreds.user, { displayName: creds.name });
 
     const userDoc = doc(userCollectionRef, userCreds.user.uid);
 
@@ -121,6 +123,7 @@ export async function registerUser(creds: {
       name: creds.name,
       email: creds.email,
       dateOfBirth: creds.dateOfBirth,
+      isHost: false,
     });
 
     return userCreds.user;

@@ -37,7 +37,7 @@ import {
 import { loginAction, registerAction } from "./utils/actions";
 import Register from "./components/Register";
 import { useContext } from "react";
-import { UserContext } from "./context/UserContext";
+import UserContext from "./context/UserContext";
 
 const App = () => {
   const userContext = useContext(UserContext);

@@ -77,7 +77,7 @@ export async function registerAction({ request }: ActionFunctionArgs) {
       name: data.name,
       email: data.email,
       password: data.password,
-      dateOfBirth: data.dateOfBirth,
+      dateOfBirth: data.dateOfBirth.valueOf(),
     });
     localStorage.setItem("vanLifeUser", JSON.stringify(userData));
     return redirect(redirectPath ?? "/");
