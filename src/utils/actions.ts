@@ -16,15 +16,16 @@ export function loginAction(context: UserContextType | null) {
 
     try {
       const data = await loginUser({ email, password });
-      if (!data)
+      if (!data) {
         throw {
           message: "User not found",
           statusText: "NO USER",
           status: 404,
         };
+      }
 
       localStorage.setItem("vanLifeUser", JSON.stringify(data));
-      context?.setUser({ email: data.email, uid: data.uid });
+      context?.setUser(data);
       return redirect(redirectPath ?? "/");
     } catch (error) {
       return error;

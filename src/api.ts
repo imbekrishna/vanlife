@@ -15,8 +15,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  UserCredential,
 } from "firebase/auth";
+import { IUser } from "./context/UserContext";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -81,7 +81,7 @@ export async function getHostVans() {
 export async function loginUser(creds: {
   email: string;
   password: string;
-}): Promise<UserCredential["user"] | undefined> {
+}): Promise<IUser | undefined> {
   try {
     const userCreds = await signInWithEmailAndPassword(
       auth,
@@ -91,8 +91,9 @@ export async function loginUser(creds: {
 
     const docRef = doc(userCollectionRef, userCreds.user.uid);
     const userSnapshot = await getDoc(docRef);
+    const userData = userSnapshot.data() as IUser;
 
-    return { ...userCreds.user, ...userSnapshot.data() };
+    return { ...userData, uid: userSnapshot.id };
   } catch (error) {
     if (error instanceof FirebaseError) {
       throw {
