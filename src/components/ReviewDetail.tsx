@@ -1,4 +1,4 @@
-import starIcon from "../assets/star_icon.svg";
+import starIcon from "@assets/star_icon.svg";
 
 const ReviewDetail = ({
   user,

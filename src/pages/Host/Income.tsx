@@ -1,4 +1,4 @@
-import IncomeChart from "../../components/IncomeChart";
+import IncomeChart from "@components/IncomeChart";
 
 const transactionsData = [
   { amount: 720, date: "Jan", id: "1" },

@@ -1,4 +1,4 @@
-import { Van } from "../utils/types";
+import { Van } from "@utils/types";
 
 const VanListItem = ({ van }: { van: Van }) => {
   return (

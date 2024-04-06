@@ -1,28 +1,34 @@
+import { useContext } from "react";
 import {
-  RouterProvider,
   Route,
+  RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import About from "./pages/About";
-import Home from "./pages/Home";
 
 // import "./server";
-import Vans from "./pages/Vans/Vans";
-import VanDetail from "./pages/Vans/VanDetail";
-import Layout from "./components/Layout";
-import Dashboard from "./pages/Host/Dashboard";
-import Income from "./pages/Host/Income";
-import Reviews from "./pages/Host/Reviews";
-import HostLayout from "./components/HostLayout";
-import HostVans from "./pages/Host/HostVans";
-import HostVanDetail from "./pages/Host/HostVanDetail";
-import HostVanPricing from "./pages/Host/HostVanPricing";
-import HostVanPhotos from "./pages/Host/HostVanPhotos";
-import HostVanInfo from "./pages/Host/HostVanInfo";
-import FourOFour from "./pages/404";
-import Error from "./components/Error";
-import Login from "./components/Login";
+
+import About from "@pages/About";
+import Home from "@pages/Home";
+import Error from "@components/Error";
+import HostLayout from "@components/HostLayout";
+import Layout from "@components/Layout";
+import Login from "@components/Login";
+import Register from "@components/Register";
+import UserContext from "./context/UserContext";
+import FourOFour from "@pages/404";
+import Dashboard from "@pages/Host/Dashboard";
+import HostVanDetail from "@pages/Host/HostVanDetail";
+import HostVanInfo from "@pages/Host/HostVanInfo";
+import HostVanPhotos from "@pages/Host/HostVanPhotos";
+import HostVanPricing from "@pages/Host/HostVanPricing";
+import HostVans from "@pages/Host/HostVans";
+import Income from "@pages/Host/Income";
+import Reviews from "@pages/Host/Reviews";
+import VanDetail from "@pages/Vans/VanDetail";
+import Vans from "@pages/Vans/Vans";
+
+import { loginAction, registerAction } from "@utils/actions";
 import {
   dashboardLoaader,
   hostVansDetailLoader,
@@ -33,11 +39,7 @@ import {
   reviewsLoader,
   vanDetailLoader,
   vansLoader,
-} from "./utils/loaders";
-import { loginAction, registerAction } from "./utils/actions";
-import Register from "./components/Register";
-import { useContext } from "react";
-import UserContext from "./context/UserContext";
+} from "@utils/loaders";
 
 const App = () => {
   const userContext = useContext(UserContext);
@@ -87,7 +89,6 @@ const App = () => {
           element={<HostVanDetail />}
           errorElement={<Error />}
         >
-          {/* TODO: Refactor component locations */}
           <Route index element={<HostVanInfo />} />
           <Route path="pricing" element={<HostVanPricing />} />
           <Route path="photos" element={<HostVanPhotos />} />

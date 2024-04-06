@@ -1,8 +1,8 @@
 import { Suspense } from "react";
-import { Van } from "../../utils/types";
+import { Van } from "@utils/types";
 import { Await, Link, useLoaderData } from "react-router-dom";
-import HostVansSkeleton from "../../components/skeletons/HostVansSkeleton";
-import VanListItem from "../../components/VanListItem";
+import HostVansSkeleton from "@components/skeletons/HostVansSkeleton";
+import VanListItem from "@components/VanListItem";
 
 const HostVans = () => {
   const loaderData = useLoaderData() as { vans: Promise<Van[]> };

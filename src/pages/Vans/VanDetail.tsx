@@ -1,7 +1,7 @@
 import { Await, Link, useLoaderData, useLocation } from "react-router-dom";
-import { Van } from "../../utils/types";
+import { Van } from "@utils/types";
 import { Suspense } from "react";
-import VanDetailSkeleton from "../../components/skeletons/VanDetailSekelton";
+import VanDetailSkeleton from "@components/skeletons/VanDetailSekelton";
 
 const VanDetail = () => {
   const loaderData = useLoaderData() as { van: Promise<Van> };

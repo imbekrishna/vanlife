@@ -1,5 +1,5 @@
 import { useRouteError } from "react-router-dom";
-import { APIError } from "../utils/types";
+import { APIError } from "@utils/types";
 
 const Error = () => {
   const error = useRouteError() as APIError;

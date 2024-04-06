@@ -20,7 +20,26 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    /* Vite alias */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@pages/*": [
+        "src/pages/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+    }
   },
   "include": [
     "src"

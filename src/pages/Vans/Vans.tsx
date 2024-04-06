@@ -1,8 +1,8 @@
-import { Van } from "../../utils/types";
+import { Van } from "@utils/types";
 import { Link, useSearchParams, useLoaderData, Await } from "react-router-dom";
 import clsx from "clsx";
 import { Suspense } from "react";
-import VansSkeleton from "../../components/skeletons/VansSkeleton";
+import VansSkeleton from "@components/skeletons/VansSkeleton";
 
 const Vans = () => {
   const [searchParams, setSearchParams] = useSearchParams();

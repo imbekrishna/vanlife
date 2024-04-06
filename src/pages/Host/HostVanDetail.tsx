@@ -1,5 +1,5 @@
 import { Await, Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
-import { Van } from "../../utils/types";
+import { Van } from "@utils/types";
 import clsx from "clsx";
 import { Suspense } from "react";
 

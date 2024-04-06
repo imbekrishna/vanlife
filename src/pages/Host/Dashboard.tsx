@@ -1,9 +1,9 @@
-import starIcon from "../../assets/star_icon.svg";
+import starIcon from "@assets/star_icon.svg";
 import { Await, Link, Outlet, useLoaderData } from "react-router-dom";
-import { Van } from "../../utils/types";
+import { Van } from "@utils/types";
 import { Suspense } from "react";
-import HostVansSkeleton from "../../components/skeletons/HostVansSkeleton";
-import VanListItem from "../../components/VanListItem";
+import HostVansSkeleton from "@components/skeletons/HostVansSkeleton";
+import VanListItem from "@components/VanListItem";
 
 const Dashboard = () => {
   const loaderData = useLoaderData() as { vans: Promise<Van[]> };

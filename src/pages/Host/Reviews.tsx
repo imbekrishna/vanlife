@@ -1,6 +1,6 @@
-import starIcon from "../../assets/star_icon.svg";
-import ReviewDetail from "../../components/ReviewDetail";
-import ReviewScale from "../../components/ReviewScale";
+import starIcon from "@assets/star_icon.svg";
+import ReviewDetail from "@components/ReviewDetail";
+import ReviewScale from "@components/ReviewScale";
 
 const Reviews = () => {
   const reviews = [

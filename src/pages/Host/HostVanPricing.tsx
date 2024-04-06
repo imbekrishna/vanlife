@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom";
-import { Van } from "../../utils/types";
+import { Van } from "@utils/types";
 
 const HostVanPricing = () => {
   const vanData: Van = useOutletContext();

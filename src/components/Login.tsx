@@ -5,7 +5,7 @@ import {
   useLoaderData,
   useNavigation,
 } from "react-router-dom";
-import { APIError } from "../utils/types";
+import { APIError } from "@utils/types";
 
 const Login = () => {
   const message = useLoaderData() as string | null;
