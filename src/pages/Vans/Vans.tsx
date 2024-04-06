@@ -20,7 +20,7 @@ const Vans = () => {
         <Link
           to={van.id}
           state={{ search: searchParams.toString(), type: typeFilter }}
-          aria-label={`View details for ${van.name}, priced at $${van.price} per day`}
+          aria-label={`View details for ${van.name}, priced at $${van.price} per hour`}
           className="flex flex-col gap-2"
         >
           <img className="max-w-full rounded-md" src={van.imageUrl} />
@@ -31,7 +31,9 @@ const Vans = () => {
             </div>
             <p className="text-xl font-medium">
               ${van.price}
-              <span className="block text-sm font-normal text-right">/day</span>
+              <span className="block text-sm font-normal text-right">
+                /hour
+              </span>
             </p>
           </div>
         </Link>

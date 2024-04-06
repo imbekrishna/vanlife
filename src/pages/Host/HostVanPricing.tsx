@@ -8,7 +8,7 @@ const HostVanPricing = () => {
       <span className="text-xl font-medium text-textDark">
         ${vanData.price}
       </span>
-      /day
+      /hour
     </p>
   );
 };

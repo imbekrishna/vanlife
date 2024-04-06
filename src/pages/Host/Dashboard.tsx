@@ -13,7 +13,7 @@ const Dashboard = () => {
         <div className="flex flex-col gap-3">
           <h1 className="text-2xl font-bold">Welcome!</h1>
           <p>
-            Income in last <span className="underline">30 days</span>
+            Income in last <span className="underline">30 hours</span>
           </p>
           <p className="text-4xl font-bold">$2,2260</p>
         </div>

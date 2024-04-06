@@ -27,7 +27,7 @@ const Reviews = () => {
         <span className="text-2xl text-textDark font-bold mr-4">
           Your reviews
         </span>{" "}
-        last <span className="underline font-semibold">30 days</span>
+        last <span className="underline font-semibold">30 hours</span>
       </p>
 
       <div className="flex items-center tracking-wide mt-4">

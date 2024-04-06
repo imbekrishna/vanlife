@@ -16,7 +16,7 @@ const Income = () => {
       <div className="flex flex-col gap-3">
         <h1 className="text-2xl font-bold">Income</h1>
         <p className="text-xs text-textGray">
-          Last <span className="underline font-semibold">30 days</span>
+          Last <span className="underline font-semibold">30 hours</span>
         </p>
         <p className="text-3xl font-bold">${total}</p>
       </div>
@@ -26,7 +26,7 @@ const Income = () => {
       <div className="flex justify-between items-center mt-4">
         <p className="font-bold tracking-wide">Your transactions (6)</p>
         <p className="text-xs">
-          Last <span className="underline">30 days</span>
+          Last <span className="underline">30 hours</span>
         </p>
       </div>
       <div className="flex flex-col gap-2 mt-4 overflow-scroll h-1/3">

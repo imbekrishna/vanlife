@@ -19,7 +19,7 @@ const HostVanDetail = () => {
             <i className={`van-type ${van?.type} selected`}>{van?.type}</i>
             <h1 className="font-bold text-2xl">{van?.name}</h1>
             <p className="text-lg">
-              <span className="font-bold">${van?.price}</span>/day
+              <span className="font-bold">${van?.price}</span>/hour
             </p>
           </div>
         </div>
