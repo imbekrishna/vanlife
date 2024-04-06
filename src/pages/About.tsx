@@ -3,7 +3,7 @@ import bgImg from "../assets/about_bg.png";
 
 const About = () => {
   return (
-    <div className="about-page-container max-w-screen-lg my-8">
+    <div className="about-page-container max-w-screen-lg my-8 px-6">
       <img src={bgImg} className="max-w-full rounded-md" />
       <div className="px-6 text-dark mb-14">
         <h1 className="text-4xl font-bold my-8">

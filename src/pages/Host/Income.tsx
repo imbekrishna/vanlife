@@ -1,28 +1,43 @@
-import starIcon from "../../assets/star_icon.svg";
-import ReviewScale from "../../components/ReviewScale";
+import IncomeChart from "../../components/IncomeChart";
+
+const transactionsData = [
+  { amount: 720, date: "Jan", id: "1" },
+  { amount: 560, date: "Dec", id: "2" },
+  { amount: 980, date: "Dec", id: "3" },
+  { amount: 720, date: "Jan", id: "1" },
+  { amount: 560, date: "Dec", id: "2" },
+  { amount: 980, date: "Dec", id: "3" },
+];
 
 const Income = () => {
+  const total = transactionsData.reduce((prev, curr) => prev + curr.amount, 0);
   return (
-    <div className="px-6">
-      <p className="text-textGray">
-        <span className="text-2xl text-textDark font-bold mr-4">
-          Your reviews
-        </span>{" "}
-        last <span className="underline font-semibold">30 days</span>
-      </p>
-
-      <div className="flex items-center tracking-wide mt-4">
-        <span className="text-2xl font-bold">5.0</span>
-        <img src={starIcon} alt="" className="inline-block w-6 ml-2" />
-        <span className="inline-block">overall rating</span>
+    <div className="h-full px-6">
+      <div className="flex flex-col gap-3">
+        <h1 className="text-2xl font-bold">Income</h1>
+        <p className="text-xs text-textGray">
+          Last <span className="underline font-semibold">30 days</span>
+        </p>
+        <p className="text-3xl font-bold">${total}</p>
       </div>
-
-      <div className="flex flex-col gap-2 mt-4 text-sm">
-        <ReviewScale label="5 stars" total={21} value={10} />
-        <ReviewScale label="4 stars" total={21} value={5} />
-        <ReviewScale label="3 stars" total={21} value={3} />
-        <ReviewScale label="2 stars" total={21} value={2} />
-        <ReviewScale label="1 stars" total={21} value={1} />
+      <div className="h-52 mt-8">
+        <IncomeChart data={transactionsData} />
+      </div>
+      <div className="flex justify-between items-center mt-4">
+        <p className="font-bold tracking-wide">Your transactions (6)</p>
+        <p className="text-xs">
+          Last <span className="underline">30 days</span>
+        </p>
+      </div>
+      <div className="flex flex-col gap-2 mt-4 overflow-scroll h-1/3">
+        {transactionsData.map((data) => (
+          <div className="flex bg-white p-4 items-center justify-between gap-4 rounded-lg">
+            <span className="text-lg font-semibold tracking-wide">
+              ${data.amount}
+            </span>
+            <span className="text-sm text-textGray">{data.date}</span>
+          </div>
+        ))}
       </div>
     </div>
   );

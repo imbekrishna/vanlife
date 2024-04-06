@@ -86,7 +86,7 @@ const Vans = () => {
   };
 
   return (
-    <div className="w-full my-4">
+    <div className="w-full my-4 px-6">
       <h1 className="text-4xl font-bold">Explore our van options</h1>
       <Suspense fallback={<VansSkeleton />}>
         <Await resolve={loaderData.vans}>{renderVanElements}</Await>

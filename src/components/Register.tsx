@@ -12,7 +12,7 @@ const Register = () => {
   const error = useActionData() as string[] | undefined;
   const navigation = useNavigation();
   return (
-    <div className="flex flex-col items-center justify-center w-full my-8 md:w-3/4 lg:w-1/2">
+    <div className="flex flex-col items-center justify-center w-full my-8 md:w-3/4 lg:w-1/2 px-6">
       {message && (
         <p className="p-2 bg-rose-100 w-full text-center rounded-md border-2 border-rose-600 text-rose-600 mb-4">
           {message}
