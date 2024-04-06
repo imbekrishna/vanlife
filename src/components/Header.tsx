@@ -3,7 +3,6 @@ import userIcon from "@assets/user_icon.svg";
 import logoutIcon from "@assets/logout_icon.svg";
 import menuIcon from "@assets/menu_icon.svg";
 import clsx from "clsx";
-import { signOutuser } from "@/api";
 import { useContext, useState } from "react";
 import UserContext from "@/context/UserContext";
 
@@ -12,14 +11,6 @@ const Header = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  async function handleLogout() {
-    try {
-      await signOutuser();
-      contextData?.removeUser();
-    } catch (error) {
-      console.error(error);
-    }
-  }
   return (
     <header className="px-6 py-10 bg-primary items-center border-b-2 sm:flex sm:justify-between sm:items-center">
       <div className="flex items-center">
@@ -85,22 +76,13 @@ const Header = () => {
           </NavLink>
         )}
         {contextData?.user && (
-          <>
-            <NavLink
-              to="/"
-              className="flex items-center gap-2 bg-btnPrimary text-white p-2 rounded-md"
-            >
-              <img src={userIcon} alt="" className="invert" />{" "}
-              <span>Profile</span>
-            </NavLink>
-            {/* TODO: Move to profile page */}
-            <button
-              className="flex items-center gap-2 bg-skeletonBg p-2 rounded-md"
-              onClick={handleLogout}
-            >
-              <img src={logoutIcon} alt="" /> <span>Logout</span>
-            </button>
-          </>
+          <NavLink
+            to="/profile"
+            className="flex items-center gap-2 bg-btnPrimary text-white p-2 rounded-md"
+          >
+            <img src={userIcon} alt="" className="invert" />{" "}
+            <span>Profile</span>
+          </NavLink>
         )}
       </nav>
     </header>

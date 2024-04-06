@@ -3,6 +3,7 @@ import {
   RouteObject,
   RouterProvider,
   createBrowserRouter,
+  redirect,
 } from "react-router-dom";
 
 // import "./server";
@@ -56,6 +57,27 @@ const App = () => {
           lazy: async () => {
             const Register = await import("@components/Register");
             return { Component: Register.default };
+          },
+        },
+        {
+          path: "profile",
+          loader: async (args) => {
+            if (!userContext?.user) {
+              const url = new URL(args.request.url);
+              const path = url.pathname;
+
+              const queryParams = new URLSearchParams({
+                message: "You must log in first.",
+                redirectTo: path,
+              });
+
+              return redirect(`/login?${queryParams.toString()}`);
+            }
+            return null;
+          },
+          lazy: async () => {
+            const Profile = await import("@pages/Profile");
+            return { Component: Profile.default };
           },
         },
         {

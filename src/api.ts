@@ -105,7 +105,7 @@ export async function loginUser(creds: {
 
     const docRef = doc(userCollectionRef, userCreds.user.uid);
     const userSnapshot = await getDoc(docRef);
-    const userData = userSnapshot.data() as IUser;
+    const userData = { ...userSnapshot.data() } as IUser;
 
     return { ...userData, uid: userSnapshot.id };
   } catch (error) {
