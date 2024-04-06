@@ -67,7 +67,11 @@ const App = () => {
       />
 
       <Route path="host" element={<HostLayout />}>
-        <Route index loader={dashboardLoaader} element={<Dashboard />} />
+        <Route
+          index
+          loader={dashboardLoaader(userContext)}
+          element={<Dashboard />}
+        />
         <Route path="income" loader={incomeLoader} element={<Income />} />
         <Route path="reviews" loader={reviewsLoader} element={<Reviews />} />
         <Route

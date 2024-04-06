@@ -2,6 +2,7 @@ import { defer, type LoaderFunctionArgs, type Params } from "react-router-dom";
 import { getHostVans, getVans, getVan } from "../api";
 
 import { requireAuth } from "./utils";
+import { UserContextType } from "../context/UserContext";
 
 export async function layoutLoader() {
   const data = localStorage.getItem("vanLifeUser");
@@ -23,10 +24,12 @@ export async function vanDetailLoader({ params }: { params: Params<"vanId"> }) {
   return defer({ van: getVan(params.vanId) });
 }
 
-export async function dashboardLoaader(args: LoaderFunctionArgs) {
-  await requireAuth(args);
-  // Add information to user profile
-  return defer({ vans: getHostVans() });
+export function dashboardLoaader(context: UserContextType | null) {
+  const userId = context?.user?.uid;
+  return async (args: LoaderFunctionArgs) => {
+    await requireAuth(args);
+    return defer({ vans: getHostVans(userId) });
+  };
 }
 
 export async function incomeLoader(args: LoaderFunctionArgs) {

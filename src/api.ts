@@ -64,11 +64,8 @@ export async function getVan(id: string) {
   };
 }
 
-export async function getHostVans() {
-  const q = query(
-    vansCollectionRef,
-    where("hostId", "==", auth.currentUser?.uid)
-  );
+export async function getHostVans(userId: string) {
+  const q = query(vansCollectionRef, where("hostId", "==", userId));
   const querySnapshot = await getDocs(q);
   const dataArr = querySnapshot.docs.map((doc) => ({
     ...doc.data(),
