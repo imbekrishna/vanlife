@@ -76,7 +76,7 @@ const App = () => {
         <Route path="reviews" loader={reviewsLoader} element={<Reviews />} />
         <Route
           path="vans"
-          loader={hostVansLoader}
+          loader={hostVansLoader(userContext)}
           element={<HostVans />}
           errorElement={<Error />}
         />

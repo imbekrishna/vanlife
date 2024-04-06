@@ -28,6 +28,7 @@ export function dashboardLoaader(context: UserContextType | null) {
   const userId = context?.user?.uid;
   return async (args: LoaderFunctionArgs) => {
     await requireAuth(args);
+    if (!userId) return null;
     return defer({ vans: getHostVans(userId) });
   };
 }
@@ -40,9 +41,13 @@ export async function reviewsLoader(args: LoaderFunctionArgs) {
   return await requireAuth(args);
 }
 
-export async function hostVansLoader(args: LoaderFunctionArgs) {
-  await requireAuth(args);
-  return defer({ vans: getHostVans() });
+export function hostVansLoader(context: UserContextType | null) {
+  const userId = context?.user?.uid;
+  return async (args: LoaderFunctionArgs) => {
+    await requireAuth(args);
+    if (!userId) return null;
+    return defer({ vans: getHostVans(userId) });
+  };
 }
 
 // TODO: Update function signature
