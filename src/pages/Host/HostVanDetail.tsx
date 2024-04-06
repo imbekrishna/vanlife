@@ -1,4 +1,11 @@
-import { Await, Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
+import {
+  Await,
+  Link,
+  NavLink,
+  Navigate,
+  Outlet,
+  useLoaderData,
+} from "react-router-dom";
 import { Van } from "@utils/types";
 import clsx from "clsx";
 import { Suspense } from "react";
@@ -77,7 +84,9 @@ const HostVanDetail = () => {
         </Link>
       </p>
       <Suspense fallback={<h1>Loading van detail...</h1>}>
-        <Await resolve={loaderData.van}>{renderVan}</Await>
+        <Await resolve={loaderData.van}>
+          {(data) => (data ? renderVan(data) : <Navigate to="/404" />)}
+        </Await>
       </Suspense>
     </section>
   );

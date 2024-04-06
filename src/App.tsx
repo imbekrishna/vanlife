@@ -76,6 +76,7 @@ const App = () => {
         {
           path: "vans/:vanId",
           loader: vanDetailLoader,
+          errorElement: <Error />,
           lazy: async () => {
             const VanDetail = await import("@pages/Vans/VanDetail");
             return { Component: VanDetail.default };
@@ -163,6 +164,10 @@ const App = () => {
         },
         {
           path: "*",
+          element: <FourOFour />,
+        },
+        {
+          path: "404",
           element: <FourOFour />,
         },
       ],

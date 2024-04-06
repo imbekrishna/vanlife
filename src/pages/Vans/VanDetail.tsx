@@ -1,4 +1,10 @@
-import { Await, Link, useLoaderData, useLocation } from "react-router-dom";
+import {
+  Await,
+  Link,
+  Navigate,
+  useLoaderData,
+  useLocation,
+} from "react-router-dom";
 import { Van } from "@utils/types";
 import { Suspense } from "react";
 import VanDetailSkeleton from "@components/skeletons/VanDetailSekelton";
@@ -6,9 +12,7 @@ import VanDetailSkeleton from "@components/skeletons/VanDetailSekelton";
 const VanDetail = () => {
   const loaderData = useLoaderData() as { van: Promise<Van> };
 
-  const {
-    state: { search, type },
-  } = useLocation();
+  const { state } = useLocation();
 
   function renderVan(van: Van) {
     return (
@@ -38,11 +42,17 @@ const VanDetail = () => {
       <Suspense fallback={<VanDetailSkeleton />}>
         <p>
           <span className="mr-2">←</span>
-          <Link to={`..?${search ?? ""}`} relative="path" className="underline">
-            Back to {type ?? "all"} vans
+          <Link
+            to={`..?${state?.search ?? ""}`}
+            relative="path"
+            className="underline"
+          >
+            Back to {state?.type ?? "all"} vans
           </Link>
         </p>
-        <Await resolve={loaderData.van}>{renderVan}</Await>
+        <Await resolve={loaderData.van}>
+          {(vanData) => (vanData ? renderVan(vanData) : <Navigate to="/404" />)}
+        </Await>
       </Suspense>
     </div>
   );

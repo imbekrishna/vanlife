@@ -73,8 +73,6 @@ export function hostVansLoader(context: UserContextType | null) {
   };
 }
 
-// TODO: Update function signature
-
 export async function hostVansDetailLoader({
   params,
 }: {

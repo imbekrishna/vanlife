@@ -56,12 +56,29 @@ export async function getVans() {
 }
 
 export async function getVan(id: string) {
-  const docRef = doc(db, "vans", id);
-  const vanSnapshot = await getDoc(docRef);
-  return {
-    ...vanSnapshot.data(),
-    id: vanSnapshot.id,
-  };
+  try {
+    const docRef = doc(db, "vans", id);
+    const vanSnapshot = await getDoc(docRef);
+    if (!vanSnapshot.exists()) {
+      throw {
+        message: "No such van",
+        statusText: "NO_VAN",
+      };
+    }
+    return {
+      ...vanSnapshot.data(),
+      id: vanSnapshot.id,
+    };
+  } catch (error) {
+    if (error instanceof FirebaseError) {
+      throw {
+        message: error.message,
+        statusText: error.name,
+        status: error.code,
+      };
+    }
+    return null;
+  }
 }
 
 export async function getHostVans(userId: string) {
