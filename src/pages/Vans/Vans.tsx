@@ -20,17 +20,18 @@ const Vans = () => {
         <Link
           to={van.id}
           state={{ search: searchParams.toString(), type: typeFilter }}
-          aria-label={`View details for ${van.name}, priced at $${van.price} per hour`}
+          aria-label={`View details for ${van.name}, priced at ₹${van.price} per hour`}
           className="flex flex-col gap-2"
         >
           <img className="max-w-full rounded-md" src={van.imageUrl} />
-          <div className="flex justify-between">
+          {/* BUG:Fix spacing issue between name and price on small screens */}
+          <div className="flex justify-between gap-1">
             <div className="flex flex-col gap-2">
               <p className="font-bold text-xl">{van.name}</p>
               <i className={`van-type ${van.type} selected`}>{van.type}</i>
             </div>
             <p className="text-xl font-medium">
-              ${van.price}
+              ₹{van.price}
               <span className="block text-sm font-normal text-right">
                 /hour
               </span>

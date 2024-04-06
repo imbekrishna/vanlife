@@ -22,7 +22,7 @@ const VanDetail = () => {
           <i className={`van-type ${van.type} selected`}>{van.type}</i>
           <h1 className="font-bold text-3xl">{van.name}</h1>
           <p className="text-xl">
-            <span className="font-bold">${van.price}</span>/hour
+            <span className="font-bold">₹{van.price}</span>/hour
           </p>
           <p>{van.description}</p>
           <Link to="" className="link-button bg-btnPrimary text-white mt-8">

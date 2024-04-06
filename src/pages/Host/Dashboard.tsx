@@ -3,10 +3,23 @@ import { Await, Link, Outlet, useLoaderData } from "react-router-dom";
 import { Van } from "../../utils/types";
 import { Suspense } from "react";
 import HostVansSkeleton from "../../components/skeletons/HostVansSkeleton";
-import VansList from "../../components/VansList";
+import VanListItem from "../../components/VanListItem";
 
 const Dashboard = () => {
   const loaderData = useLoaderData() as { vans: Promise<Van[]> };
+
+  function renderVans(hostVans: Van[]) {
+    return hostVans.map((van) => (
+      <Link
+        key={van.id}
+        to={van.id}
+        aria-label={`View details for ${van.name}, priced at ₹${van.price} per hour`}
+      >
+        <VanListItem van={van} />
+      </Link>
+    ));
+  }
+
   return (
     <div>
       <div className="p-6 bg-[#FFEAD0] flex justify-between">
@@ -15,7 +28,7 @@ const Dashboard = () => {
           <p>
             Income in last <span className="underline">30 hours</span>
           </p>
-          <p className="text-4xl font-bold">$2,2260</p>
+          <p className="text-4xl font-bold">₹2,2260</p>
         </div>
         <Link to="income">Details</Link>
       </div>
@@ -33,11 +46,11 @@ const Dashboard = () => {
           <Link to="vans">View all</Link>
         </div>
         {/* TODO: Add Edit button for host vans */}
-        <Suspense fallback={<HostVansSkeleton />}>
-          <Await resolve={loaderData.vans}>
-            {(vans) => <VansList vans={vans} />}
-          </Await>
-        </Suspense>
+        <div className="flex flex-col gap-4">
+          <Suspense fallback={<HostVansSkeleton />}>
+            <Await resolve={loaderData.vans}>{renderVans}</Await>
+          </Suspense>
+        </div>
       </div>
       <Outlet />
     </div>

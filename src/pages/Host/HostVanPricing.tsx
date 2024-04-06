@@ -6,7 +6,7 @@ const HostVanPricing = () => {
   return (
     <p className="text-textGray">
       <span className="text-xl font-medium text-textDark">
-        ${vanData.price}
+        ₹{vanData.price}
       </span>
       /hour
     </p>
