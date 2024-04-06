@@ -24,7 +24,9 @@ export async function vanDetailLoader({ params }: { params: Params<"vanId"> }) {
 }
 
 export async function dashboardLoaader(args: LoaderFunctionArgs) {
-  return await requireAuth(args);
+  await requireAuth(args);
+  // Add information to user profile
+  return defer({ vans: getHostVans() });
 }
 
 export async function incomeLoader(args: LoaderFunctionArgs) {

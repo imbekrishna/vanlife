@@ -6,7 +6,8 @@ const Layout = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="flex flex-1 bg-primary h-full justify-center px-6">
+      {/* TOOD: Fix horizontal padding on all pages */}
+      <div className="flex flex-1 bg-primary h-full justify-center">
         <Outlet />
       </div>
       <Footer />
