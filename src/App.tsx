@@ -66,7 +66,7 @@ const App = () => {
         errorElement={<Error />}
       />
 
-      <Route path="host" element={<HostLayout />}>
+      <Route path="host" errorElement={<Error />} element={<HostLayout />}>
         <Route
           index
           loader={dashboardLoaader(userContext)}

@@ -1,7 +1,7 @@
 import { LoaderFunctionArgs, redirect } from "react-router-dom";
 
-export async function requireAuth(args: LoaderFunctionArgs) {
-  const isLoggedIn = !!localStorage.getItem("vanLifeUser");
+export function requireAuth(args: LoaderFunctionArgs) {
+  const isLoggedIn = localStorage.getItem("vanLifeUser");
   if (!isLoggedIn) {
     const url = new URL(args.request.url);
     const path = url.pathname;

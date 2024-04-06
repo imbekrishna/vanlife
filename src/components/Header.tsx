@@ -40,17 +40,19 @@ const Header = () => {
         )}
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        <NavLink
-          to="/host"
-          className={({ isActive }) =>
-            clsx(
-              "hover:underline hover:font-bold",
-              isActive ? "font-bold underline" : null
-            )
-          }
-        >
-          Host
-        </NavLink>
+        {contextData?.user && (
+          <NavLink
+            to="/host"
+            className={({ isActive }) =>
+              clsx(
+                "hover:underline hover:font-bold",
+                isActive ? "font-bold underline" : null
+              )
+            }
+          >
+            Host
+          </NavLink>
+        )}
         <NavLink
           to="/about"
           className={({ isActive }) =>

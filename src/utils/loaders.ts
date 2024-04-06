@@ -1,4 +1,9 @@
-import { defer, type LoaderFunctionArgs, type Params } from "react-router-dom";
+import {
+  defer,
+  redirect,
+  type LoaderFunctionArgs,
+  type Params,
+} from "react-router-dom";
 import { getHostVans, getVans, getVan } from "../api";
 
 import { requireAuth } from "./utils";
@@ -27,25 +32,43 @@ export async function vanDetailLoader({ params }: { params: Params<"vanId"> }) {
 export function dashboardLoaader(context: UserContextType | null) {
   const userId = context?.user?.uid;
   return async (args: LoaderFunctionArgs) => {
-    await requireAuth(args);
-    if (!userId) return null;
+    if (!userId) {
+      const url = new URL(args.request.url);
+      const path = url.pathname;
+
+      const queryParams = new URLSearchParams({
+        message: "You must log in first.",
+        redirectTo: path,
+      });
+
+      return redirect(`/login?${queryParams.toString()}`);
+    }
     return defer({ vans: getHostVans(userId) });
   };
 }
 
 export async function incomeLoader(args: LoaderFunctionArgs) {
-  return await requireAuth(args);
+  return requireAuth(args);
 }
 
 export async function reviewsLoader(args: LoaderFunctionArgs) {
-  return await requireAuth(args);
+  return requireAuth(args);
 }
 
 export function hostVansLoader(context: UserContextType | null) {
   const userId = context?.user?.uid;
   return async (args: LoaderFunctionArgs) => {
-    await requireAuth(args);
-    if (!userId) return null;
+    if (!userId) {
+      const url = new URL(args.request.url);
+      const path = url.pathname;
+
+      const queryParams = new URLSearchParams({
+        message: "You must log in first.",
+        redirectTo: path,
+      });
+
+      return redirect(`/login?${queryParams.toString()}`);
+    }
     return defer({ vans: getHostVans(userId) });
   };
 }
