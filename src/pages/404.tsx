@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const FourOFour = () => {
+  // TODO: Fix layout
   return (
     <div className="p-8 flex flex-col">
       <h1 className="font-bold text-4xl mb-8">

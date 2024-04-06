@@ -1,33 +1,17 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import {
-  Route,
+  RouteObject,
   RouterProvider,
   createBrowserRouter,
-  createRoutesFromElements,
 } from "react-router-dom";
 
 // import "./server";
 
-import About from "@pages/About";
-import Home from "@pages/Home";
-import Error from "@components/Error";
-import HostLayout from "@components/HostLayout";
-import Layout from "@components/Layout";
-import Login from "@components/Login";
-import Register from "@components/Register";
-import UserContext from "./context/UserContext";
-import FourOFour from "@pages/404";
-import Dashboard from "@pages/Host/Dashboard";
-import HostVanDetail from "@pages/Host/HostVanDetail";
-import HostVanInfo from "@pages/Host/HostVanInfo";
-import HostVanPhotos from "@pages/Host/HostVanPhotos";
-import HostVanPricing from "@pages/Host/HostVanPricing";
-import HostVans from "@pages/Host/HostVans";
-import Income from "@pages/Host/Income";
-import Reviews from "@pages/Host/Reviews";
-import VanDetail from "@pages/Vans/VanDetail";
-import Vans from "@pages/Vans/Vans";
+const Error = React.lazy(() => import("@components/Error"));
+const Layout = React.lazy(() => import("@components/Layout"));
+const FourOFour = React.lazy(() => import("@pages/404"));
 
+import UserContext from "./context/UserContext";
 import { loginAction, registerAction } from "@utils/actions";
 import {
   dashboardLoaader,
@@ -44,62 +28,148 @@ import {
 const App = () => {
   const userContext = useContext(UserContext);
 
-  const routes = createRoutesFromElements(
-    <Route path="/" loader={layoutLoader} element={<Layout />}>
-      <Route
-        path="login"
-        loader={loginLoader}
-        action={loginAction(userContext)}
-        element={<Login />}
-      />
-      <Route path="register" action={registerAction} element={<Register />} />
-      <Route index element={<Home />} />
-      <Route path="about" element={<About />} />
-      <Route
-        path="vans"
-        loader={vansLoader}
-        element={<Vans />}
-        errorElement={<Error />}
-      />
-      <Route
-        path="vans/:vanId"
-        loader={vanDetailLoader}
-        element={<VanDetail />}
-        errorElement={<Error />}
-      />
+  const routeObject: RouteObject[] = [
+    {
+      path: "/",
+      loader: layoutLoader,
+      element: <Layout />,
+      children: [
+        {
+          index: true,
+          lazy: async () => {
+            const Home = await import("@pages/Home");
+            return { Component: Home.default };
+          },
+        },
+        {
+          path: "login",
+          loader: loginLoader,
+          action: loginAction(userContext),
+          lazy: async () => {
+            const Login = await import("@components/Login");
+            return { Component: Login.default };
+          },
+        },
+        {
+          path: "register",
+          action: registerAction,
+          lazy: async () => {
+            const Register = await import("@components/Register");
+            return { Component: Register.default };
+          },
+        },
+        {
+          path: "about",
+          lazy: async () => {
+            const About = await import("@pages/About");
+            return { Component: About.default };
+          },
+        },
+        {
+          path: "vans",
+          loader: vansLoader,
+          lazy: async () => {
+            const Vans = await import("@pages/Vans/Vans");
+            return { Component: Vans.default };
+          },
+        },
+        {
+          path: "vans/:vanId",
+          loader: vanDetailLoader,
+          lazy: async () => {
+            const VanDetail = await import("@pages/Vans/VanDetail");
+            return { Component: VanDetail.default };
+          },
+        },
+        {
+          path: "host",
+          errorElement: <Error />,
+          lazy: async () => {
+            const HostLayout = await import("@components/HostLayout");
+            return { Component: HostLayout.default };
+          },
 
-      <Route path="host" errorElement={<Error />} element={<HostLayout />}>
-        <Route
-          index
-          loader={dashboardLoaader(userContext)}
-          element={<Dashboard />}
-        />
-        <Route path="income" loader={incomeLoader} element={<Income />} />
-        <Route path="reviews" loader={reviewsLoader} element={<Reviews />} />
-        <Route
-          path="vans"
-          loader={hostVansLoader(userContext)}
-          element={<HostVans />}
-          errorElement={<Error />}
-        />
+          children: [
+            {
+              index: true,
+              loader: dashboardLoaader(userContext),
+              lazy: async () => {
+                const Dashboard = await import("@pages/Host/Dashboard");
+                return { Component: Dashboard.default };
+              },
+            },
+            {
+              path: "income",
+              loader: incomeLoader,
+              lazy: async () => {
+                const Income = await import("@pages/Host/Income");
+                return { Component: Income.default };
+              },
+            },
+            {
+              path: "reviews",
+              loader: reviewsLoader,
+              lazy: async () => {
+                const Reviews = await import("@pages/Host/Reviews");
+                return { Component: Reviews.default };
+              },
+            },
+            {
+              path: "vans",
+              loader: hostVansLoader(userContext),
+              errorElement: <Error />,
+              lazy: async () => {
+                const HostVans = await import("@pages/Host/HostVans");
+                return { Component: HostVans.default };
+              },
+            },
+            {
+              path: "vans/:vanId",
+              loader: hostVansDetailLoader,
+              errorElement: <Error />,
+              lazy: async () => {
+                const HostVanDetail = await import("@pages/Host/HostVanDetail");
+                return { Component: HostVanDetail.default };
+              },
+              children: [
+                {
+                  index: true,
+                  lazy: async () => {
+                    const HostVanInfo = await import("@pages/Host/HostVanInfo");
+                    return { Component: HostVanInfo.default };
+                  },
+                },
+                {
+                  path: "pricing",
+                  lazy: async () => {
+                    const HostVanPricing = await import(
+                      "@pages/Host/HostVanPricing"
+                    );
+                    return { Component: HostVanPricing.default };
+                  },
+                },
+                {
+                  path: "photos",
+                  lazy: async () => {
+                    const HostVanPhotos = await import(
+                      "@pages/Host/HostVanPhotos"
+                    );
+                    return { Component: HostVanPhotos.default };
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          path: "*",
+          element: <FourOFour />,
+        },
+      ],
+    },
+  ];
 
-        <Route
-          path="vans/:vanId"
-          loader={hostVansDetailLoader}
-          element={<HostVanDetail />}
-          errorElement={<Error />}
-        >
-          <Route index element={<HostVanInfo />} />
-          <Route path="pricing" element={<HostVanPricing />} />
-          <Route path="photos" element={<HostVanPhotos />} />
-        </Route>
-      </Route>
-
-      <Route path="*" element={<FourOFour />} />
-    </Route>
-  );
-
-  const router = createBrowserRouter(routes);
+  const router = createBrowserRouter(routeObject);
 
   return <RouterProvider router={router} />;
 };

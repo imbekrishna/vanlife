@@ -12,7 +12,7 @@ const Dashboard = () => {
     return hostVans.map((van) => (
       <Link
         key={van.id}
-        to={van.id}
+        to={`vans/${van.id}`}
         aria-label={`View details for ${van.name}, priced at ₹${van.price} per hour`}
       >
         <VanListItem van={van} />

@@ -23,7 +23,7 @@ const Vans = () => {
           aria-label={`View details for ${van.name}, priced at ₹${van.price} per hour`}
           className="flex flex-col gap-2"
         >
-          <img className="max-w-full rounded-md" src={van.imageUrl} />
+          <img className="w-full aspect-square rounded-md" src={van.imageUrl} />
           {/* BUG:Fix spacing issue between name and price on small screens */}
           <div className="flex justify-between gap-1">
             <div className="flex flex-col gap-2">
